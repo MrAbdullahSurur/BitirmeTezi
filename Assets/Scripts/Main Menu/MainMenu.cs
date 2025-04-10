@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        _sceneController.LoadScene("HalfLife");
+        _sceneController.LoadScene("HalfLifeMultiplayer");
     }
 
     public void Exit()
