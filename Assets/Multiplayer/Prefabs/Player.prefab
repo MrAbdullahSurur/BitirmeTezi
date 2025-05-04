@@ -125,6 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3163817395705649203}
   - component: {fileID: 8865721570785843936}
+  - component: {fileID: 5934033548872500486}
   - component: {fileID: 2499165388006373579}
   - component: {fileID: 5934861831353692053}
   - component: {fileID: 7218130673067711412}
@@ -133,9 +134,10 @@ GameObject:
   - component: {fileID: 7250281640348242504}
   - component: {fileID: 4258661269166087391}
   - component: {fileID: 8265766972471711560}
-  - component: {fileID: 853223716951411442}
   - component: {fileID: 8034848531392504260}
-  - component: {fileID: 7037068585642071670}
+  - component: {fileID: 2086258877782862770}
+  - component: {fileID: 2225582909444656328}
+  - component: {fileID: 5553353749126828637}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -187,6 +189,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5934033548872500486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8801311194270786654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3262034679
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &2499165388006373579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,6 +225,7 @@ MonoBehaviour:
   _speed: 5
   _rotationSpeed: 720
   _screenBorder: 30
+  _playerVisuals: {fileID: 598196287466498043}
 --- !u!114 &5934861831353692053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,9 +251,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultActionMap: PlayerWASD
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!58 &7218130673067711412
@@ -280,6 +304,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 850777316982171459, guid: 8cf41131d039d95419d1546a9f6e8a83, type: 3}
+  _hostBulletPrefab: {fileID: 850777316982171459, guid: 8cf41131d039d95419d1546a9f6e8a83, type: 3}
+  _clientBulletPrefab: {fileID: 850777316982171459, guid: 71b61f3aae6b9d6469dcc433133acf0d, type: 3}
   _bulletSpeed: 10
   _gunOffset: {fileID: 3747023867450544734}
   _timeBetweenShots: 0.3
@@ -295,7 +321,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621fdfed83927f4e99fad1803f3b5a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHealth: 100
+  _networkCurrentHealth:
+    m_InternalValue: 0
   _maximumHealth: 100
   OnDied:
     m_PersistentCalls:
@@ -426,33 +453,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &853223716951411442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8801311194270786654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99d2df816d13dc44b9cf7c10428ff00e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnScoreChanged:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11500000, guid: 99d2df816d13dc44b9cf7c10428ff00e, type: 3}
-        m_TargetAssemblyTypeName: ScoreUI, Assembly-CSharp
-        m_MethodName: UpdateScore
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 853223716951411442}
-          m_ObjectArgumentAssemblyTypeName: ScoreController, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &8034848531392504260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,7 +465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40f7b085c9cbc5d46b87dd52491c3a04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7037068585642071670
+--- !u!114 &2086258877782862770
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -474,15 +474,51 @@ MonoBehaviour:
   m_GameObject: {fileID: 8801311194270786654}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1333451733
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0
+--- !u!114 &2225582909444656328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8801311194270786654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5553353749126828637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8801311194270786654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 8265766972471711560}
